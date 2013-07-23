@@ -15,14 +15,14 @@
     BOOL authenticated;
 }
 
-@property(nonatomic, retain) NSString *cfUsername;
-@property(nonatomic, retain) NSString *cfAPIKey;
-@property(nonatomic, retain) NSString *authToken;
-@property(nonatomic, retain) NSString *storageURL;
-@property(nonatomic, retain) NSString *cdnManagementURL;
-@property(nonatomic, retain) AFHTTPClient *cfClient;
-@property(nonatomic, retain) id<AFCloudFilesClientDelegate> delegate;
-@property(nonatomic, retain) UIProgressView *progressBar;
+@property(nonatomic, strong) NSString *cfUsername;
+@property(nonatomic, strong) NSString *cfAPIKey;
+@property(nonatomic, strong) NSString *authToken;
+@property(nonatomic, strong) NSString *storageURL;
+@property(nonatomic, strong) NSString *cdnManagementURL;
+@property(nonatomic, strong) AFHTTPClient *cfClient;
+@property(nonatomic, strong) id<AFCloudFilesClientDelegate> delegate;
+@property(nonatomic, strong) UIProgressView *progressBar;
 
 -(id)initWithUsername:(NSString *)username andKey:(NSString *)apiKey;
 -(void)authenticate;

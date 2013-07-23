@@ -13,32 +13,18 @@
 @synthesize cfUsername, cfAPIKey, authToken, storageURL, cdnManagementURL;
 @synthesize cfClient, delegate, progressBar;
 
--(void)dealloc {
-    
-    [cfUsername release];
-    [cfAPIKey release];
-    [authToken release]; 
-    [storageURL release];
-    [cdnManagementURL release];
-    [cfClient release];
-    [delegate release];
-    
-    [super dealloc];
-}
-
 -(id)initWithUsername:(NSString *)username andKey:(NSString *)apiKey {
     
     [super init];
     if(self) {
-        
         authenticated = NO;
         cfUsername = [[NSString alloc] initWithString:username];
         cfAPIKey = [[NSString alloc] initWithString:apiKey];
-        authToken = [[NSString alloc] init];
-        storageURL = [[NSString alloc] init];
-        cdnManagementURL = [[NSString alloc] init];
-        cfClient = [[AFHTTPClient alloc] init];
-        progressBar = [[UIProgressView alloc] init];
+        authToken = NSString.new;
+        storageURL = NSString.new;
+        cdnManagementURL = NSString.new;
+        cfClient = AFHTTPClient.new;
+        progressBar = UIProgressView.new;
         [self authenticate];
     }
     return self;
@@ -101,8 +87,6 @@
                                       }];
         
         [authOp start];
-        [request release];
-        [authOp release];
     }
 }
 
@@ -114,12 +98,10 @@
         
         if([delegate respondsToSelector:@selector(AFCloudFilesClient:withAFHTTPRequestOperation:failedUploadWithError:)]) {
             
-            NSError *error = [[NSError alloc] init];
+            NSError *error = NSError.new;
             [error setValue:@"AFCloudFilesClient not authenticated. Upload operation aborted." forKey:NSLocalizedDescriptionKey];
             
             [delegate AFCloudFilesClient:self withAFHTTPRequestOperation:nil failedUploadWithError:error];
-            
-            [error release];
         }
     }
     else {
@@ -156,8 +138,6 @@
         }];
         
         [uploadOp start];
-        [request release];
-        [uploadOp release];
     }
 }
 
@@ -176,12 +156,10 @@
         
         if([delegate respondsToSelector:@selector(AFCloudFilesClient:withAFHTTPRequestOperation:failedDownloadWithError:)]) {
             
-            NSError *error = [[NSError alloc] init];
+            NSError *error = NSError.new;
             [error setValue:@"AFCloudFilesClient not authenticated. Download operation aborted." forKey:NSLocalizedDescriptionKey];
             
             [delegate AFCloudFilesClient:self withAFHTTPRequestOperation:nil failedDownloadWithError:error];
-            
-            [error release];
         }
     }
     else {
@@ -198,7 +176,6 @@
             
             UIImage *responseImage = [[UIImage alloc] initWithData:responseObject];
             image = responseImage;
-            [responseImage release];
             
             if ([delegate respondsToSelector:@selector(retrievedImage:WithFilename:fromContainer:)]) {
                 
@@ -214,8 +191,6 @@
         }];
         
         [downloadOp start];
-        [request release];
-        [downloadOp release];
     }
 }
 
