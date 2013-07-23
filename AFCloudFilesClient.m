@@ -15,7 +15,7 @@
 
 -(id)initWithUsername:(NSString *)username andKey:(NSString *)apiKey {
     
-    [super init];
+    self = [super init];
     if(self) {
         authenticated = NO;
         cfUsername = [[NSString alloc] initWithString:username];
@@ -132,7 +132,7 @@
                                             }
                                         }];
         
-        [uploadOp setUploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        [uploadOp setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             
             progressBar.progress = totalBytesWritten/totalBytesExpectedToWrite;
         }];
